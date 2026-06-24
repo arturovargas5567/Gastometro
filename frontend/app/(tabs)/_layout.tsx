@@ -2,8 +2,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import { Tabs } from "expo-router";
 import React from "react";
-import { Platform, StyleSheet, View } from "react-native";
+import { Platform, Pressable, StyleSheet } from "react-native";
 import { useTheme } from "@/src/theme/ThemeContext";
+
+const makeTabButton = (testID: string) => (props: any) => (
+  <Pressable
+    {...props}
+    testID={testID}
+    android_ripple={{ color: "transparent" }}
+    style={[props.style, { flex: 1, alignItems: "center", justifyContent: "center" }]}
+  />
+);
 
 export default function TabsLayout() {
   const { colors, mode } = useTheme();
@@ -41,7 +50,7 @@ export default function TabsLayout() {
         options={{
           title: "Inicio",
           tabBarIcon: ({ color, size }) => <Ionicons name="home" size={size} color={color} />,
-          tabBarTestID: "tab-home",
+          tabBarButton: makeTabButton("tab-home"),
         }}
       />
       <Tabs.Screen
@@ -49,7 +58,7 @@ export default function TabsLayout() {
         options={{
           title: "Estadísticas",
           tabBarIcon: ({ color, size }) => <Ionicons name="stats-chart" size={size} color={color} />,
-          tabBarTestID: "tab-stats",
+          tabBarButton: makeTabButton("tab-stats"),
         }}
       />
       <Tabs.Screen
@@ -57,7 +66,7 @@ export default function TabsLayout() {
         options={{
           title: "Objetivos",
           tabBarIcon: ({ color, size }) => <Ionicons name="flag" size={size} color={color} />,
-          tabBarTestID: "tab-goals",
+          tabBarButton: makeTabButton("tab-goals"),
         }}
       />
       <Tabs.Screen
@@ -65,15 +74,9 @@ export default function TabsLayout() {
         options={{
           title: "Ajustes",
           tabBarIcon: ({ color, size }) => <Ionicons name="settings" size={size} color={color} />,
-          tabBarTestID: "tab-settings",
+          tabBarButton: makeTabButton("tab-settings"),
         }}
       />
     </Tabs>
   );
 }
-
-const _styles = StyleSheet.create({
-  spacer: { width: 0 },
-});
-
-void View;
