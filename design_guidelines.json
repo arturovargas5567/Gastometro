@@ -1,0 +1,193 @@
+{
+  "app_name": "Gastómetro",
+  "personality": "1 iOS-Native Clean",
+  "personality_one_liner": "A sleek, modern, and user-friendly expense tracker that frames your financial data with clarity, using elegant typography and refined violet and green accents.",
+  "color": {
+    "surface": "#FBFBFC",
+    "onSurface": "#1C1C1E",
+    "surfaceSecondary": "#FFFFFF",
+    "onSurfaceSecondary": "#3A3A3C",
+    "surfaceTertiary": "#F2F2F5",
+    "onSurfaceTertiary": "#636366",
+    "surfaceInverse": "#1C1C1E",
+    "onSurfaceInverse": "#FFFFFF",
+    "brand": "#7E57C2",
+    "brandPrimary": "#7E57C2",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#9575CD",
+    "onBrandSecondary": "#FFFFFF",
+    "brandTertiary": "#EDE7F6",
+    "onBrandTertiary": "#7E57C2",
+    "success": "#34C759",
+    "onSuccess": "#FFFFFF",
+    "warning": "#FF9F0A",
+    "onWarning": "#FFFFFF",
+    "error": "#FF3B30",
+    "onError": "#FFFFFF",
+    "info": "#0A84FF",
+    "onInfo": "#FFFFFF",
+    "border": "#E5E5EA",
+    "borderStrong": "#C7C7CC",
+    "divider": "#E5E5EA"
+  },
+  "dark_color": {
+    "surface": "#000000",
+    "onSurface": "#FFFFFF",
+    "surfaceSecondary": "#1C1C1E",
+    "onSurfaceSecondary": "#EBEBF5",
+    "surfaceTertiary": "#2C2C2E",
+    "onSurfaceTertiary": "#8E8E93",
+    "surfaceInverse": "#FFFFFF",
+    "onSurfaceInverse": "#000000",
+    "brand": "#9575CD",
+    "brandPrimary": "#9575CD",
+    "onBrandPrimary": "#000000",
+    "brandSecondary": "#B39DDB",
+    "onBrandSecondary": "#000000",
+    "brandTertiary": "#311B5A",
+    "onBrandTertiary": "#D1C4E9",
+    "success": "#30D158",
+    "onSuccess": "#000000",
+    "warning": "#FFD60A",
+    "onWarning": "#000000",
+    "error": "#FF453A",
+    "onError": "#000000",
+    "info": "#5E5CE6",
+    "onInfo": "#000000",
+    "border": "#38383A",
+    "borderStrong": "#48484A",
+    "divider": "#38383A"
+  },
+  "typography": {
+    "displayFontFamily": "Plus Jakarta Sans",
+    "textFontFamily": "Plus Jakarta Sans",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Generous padding around content. Avoid dense layouts. 16px horizontal margins for cards.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 20,
+    "pill": 999
+  },
+  "shadow_tier": 1,
+  "navigation": "bottom_tabs",
+  "icon_set": "Ionicons",
+  "glassmorphism": {
+    "enabled": true,
+    "do's": [
+      "Use on the bottom tab bar.",
+      "Use on sticky headers over scrolling content.",
+      "Use on the Floating Action Button (FAB)."
+    ],
+    "dont's": [
+      "Do not use on regular list items or standard cards.",
+      "Do not use on form inputs."
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Inicio",
+      "purpose": "Monthly dashboard displaying total spent, budget progress, available money, and recent transactions.",
+      "states": {
+        "loading": "Centered spinner",
+        "empty": "Illustration of an empty wallet with a friendly message prompting the user to log their first expense.",
+        "error": "Error message with a retry button to load data."
+      },
+      "layout": "Header with Month/Year selector. Large hero card with Total Balance and a progress bar showing budget consumption (using 'brandPrimary' or 'success' green). Below, a list of recent expenses grouped by date. A fixed FAB at the bottom right with glass effect for adding a new expense."
+    },
+    {
+      "name": "Estadísticas",
+      "purpose": "Visual analytics of spending habits, including pie charts for categories and weekly evolution.",
+      "states": {
+        "loading": "Centered spinner",
+        "empty": "Illustration of a piggy bank indicating no data available to analyze yet.",
+        "error": "Error message with a retry button to load charts."
+      },
+      "layout": "Segmented control at the top to switch views (Categories vs Weekly). Modular cards containing elegant, minimalist charts. A 'Habit Analysis' card summarizing top category, month-over-month difference, and a motivational message."
+    },
+    {
+      "name": "Objetivos",
+      "purpose": "Track category-specific budgets and gamified achievements/badges.",
+      "states": {
+        "loading": "Centered spinner",
+        "empty": "Illustration of medals, encouraging users to set goals and start earning badges.",
+        "error": "Error message with a retry button."
+      },
+      "layout": "Two sections: 1. Category Budgets (vertical list with horizontal progress bars). 2. Achievements Grid (carousel or grid of badges, grayed out if locked, colored if earned)."
+    },
+    {
+      "name": "Ajustes",
+      "purpose": "App settings including currency, monthly budget setup, theme toggle, and watermark.",
+      "states": {
+        "loading": "Centered spinner",
+        "empty": "N/A",
+        "error": "N/A"
+      },
+      "layout": "Standard iOS-style grouped list. Sections for Preferences (Budget, Currency, Dark Mode). At the very bottom of the scroll view, place the 'appsthur' watermark using 'onSurfaceTertiary' text, centered."
+    }
+  ],
+  "images": {
+    "empty_home": {
+      "url": "https://images.unsplash.com/photo-1614260938313-a7fc1a7ad0d2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwxfHxlbXB0eSUyMHdhbGxldCUyMG1pbmltYWxpc3QlMjBpbGx1c3RyYXRpb258ZW58MHx8fHwxNzgyMzA2MjY0fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Empty wallet minimalist illustration"
+    },
+    "empty_stats": {
+      "url": "https://images.pexels.com/photos/3848193/pexels-photo-3848193.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "alt": "Hand placing a coin in a piggy bank"
+    },
+    "empty_achievements": {
+      "url": "https://images.pexels.com/photos/7267573/pexels-photo-7267573.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "alt": "Medals on podium blocks"
+    }
+  },
+  "haptics": {
+    "events": {
+      "fab_press": "impactLight",
+      "tab_change": "selection",
+      "achievement_unlocked": "notificationSuccess",
+      "budget_exceeded": "notificationWarning",
+      "save_expense": "impactMedium",
+      "toggle_switch": "impactLight"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Follow the requested iOS-Native Clean layout using Plus Jakarta Sans typography.",
+    "User explicitly asked for Violet and Green as accents. Use 'brandPrimary' (Violet) for primary CTA buttons, active tabs, and main interactions. Use 'success' (Green) for positive financial indicators, savings, and positive progress bars.",
+    "Implement an empty state for the Home tab using the provided 'empty_home' image. Ensure there is a strong CTA pointing to the FAB.",
+    "Build the Floating Action Button (FAB) and the Tab Bar using the Glassmorphism blur effects specified in the glassmorphism block. The FAB should sit persistently over the scrolling content on the Home screen.",
+    "Implement AsyncStorage for local storage as requested. The app should boot with no dummy data; it must start completely empty so the empty states are visible.",
+    "Settings Screen Requirement: Add a 'appsthur' watermark at the bottom of the Settings screen, visually subtle using the onSurfaceTertiary color token.",
+    "Category icons must use consistent tinted backgrounds (e.g., brandTertiary background with brandPrimary icon). Include the requested categories: Comida, Transporte, Vivienda, Compras, Ocio, Salud, Suscripciones, Otros.",
+    "Gamification: The 'Objetivos' tab should have a dedicated section for badges. Use the 'empty_achievements' image as a hero or empty state, and build visually distinct locked/unlocked states for the badges.",
+    "When displaying progress bars (budget consumption), shift the color to 'warning' or 'error' if it exceeds 80% or 100% respectively.",
+    "For Dark Mode support, rely on the dark_color tokens provided. The background should be pure black (#000000) with slightly elevated cards (#1C1C1E)."
+  ]
+}
