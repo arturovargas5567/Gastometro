@@ -261,11 +261,13 @@ export default function HomeScreen() {
                   {items.map((e, i) => {
                     const cat = CATEGORY_MAP[e.category];
                     return (
-                      <View
+                      <Pressable
                         key={e.id}
-                        style={[
+                        onPress={() => router.push({ pathname: "/add-expense", params: { id: e.id } })}
+                        style={({ pressed }) => [
                           styles.expRow,
                           {
+                            backgroundColor: pressed ? colors.surfaceTertiary : "transparent",
                             borderBottomColor: colors.divider,
                             borderBottomWidth: i < items.length - 1 ? StyleSheet.hairlineWidth : 0,
                             padding: spacing.md,
@@ -295,7 +297,13 @@ export default function HomeScreen() {
                         >
                           -{formatMoney(e.amount, settings.currency)}
                         </Text>
-                      </View>
+                        <Ionicons
+                          name="chevron-forward"
+                          size={16}
+                          color={colors.onSurfaceTertiary}
+                          style={{ marginLeft: 6 }}
+                        />
+                      </Pressable>
                     );
                   })}
                 </View>

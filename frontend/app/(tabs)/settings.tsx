@@ -166,7 +166,7 @@ export default function SettingsScreen() {
               letterSpacing: 2,
             }}
           >
-            by appsthur
+            by Arturo Vargas
           </Text>
         </View>
       </ScrollView>
