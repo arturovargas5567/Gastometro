@@ -14,8 +14,9 @@ import { ThemeProvider, useTheme } from "@/src/theme/ThemeContext";
 LogBox.ignoreAllLogs(true);
 
 // Keep the native splash visible from cold start until icon fonts register.
-SplashScreen.preventAutoHideAsync();
-
+if (typeof window === "undefined") {
+  SplashScreen.preventAutoHideAsync();
+}
 function RootNavigation() {
   const { mode, colors } = useTheme();
   return (
