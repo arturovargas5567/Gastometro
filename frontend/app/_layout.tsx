@@ -45,7 +45,13 @@ export default function RootLayout() {
     }
   }, [loaded, error]);
 
-  if (!loaded && !error) return null;
+  if (!loaded && !error) {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      Cargando...
+    </View>
+  );
+}
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
