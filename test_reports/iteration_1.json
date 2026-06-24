@@ -1,0 +1,38 @@
+{
+  "summary": "Frontend-only smoke + integration test on Gastómetro (Expo web preview, mobile viewport 390x844). Core flows work: home dashboard, FAB, add-expense modal with validation, category chips, date strip, save → returns to home and updates totals/recent list. Settings (budget, currency, dark mode toggle, reset, watermark), Goals (goal-row-food, badge-first_expense) and Stats (segmented control + habit-card) all render with the requested testIDs. AsyncStorage persistence not retested directly because each Playwright run starts in a fresh browser context (clean storage) — looked OK within a single session (state survived navigation). One blocking issue: the bottom tab bar testIDs (tab-home, tab-stats, tab-goals, tab-settings) do NOT appear in the DOM on web — tabBarTestID prop is not propagated by @react-navigation/bottom-tabs web implementation. Tabs themselves work and were reached via text/role.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "app/(tabs)/_layout.tsx", "issue": "tabBarTestID (tab-home/tab-stats/tab-goals/tab-settings) is not rendered as data-testid in the web DOM. Tabs render as <a role='tab'> with no testid. Test selectors specified in the PRD fail.", "testID": "tab-home/tab-stats/tab-goals/tab-settings", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "global", "issues": [
+        "Console warnings: 'shadow*' style props deprecated (use boxShadow), 'props.pointerEvents' deprecated, TouchableWithoutFeedback deprecated (add-expense.tsx). Non-blocking but should be cleaned.",
+        "useNativeDriver warning from Animated (no RCTAnimation on web) — animation falls back to JS, acceptable."
+      ]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/test_reports/iteration_1.json"],
+  "action_items": [
+    "Fix tab bar testIDs for web: wrap each Tabs.Screen with tabBarButton that renders a Pressable with explicit testID (or use accessibilityLabel + a custom tabBar). Current tabBarTestID prop is ignored by @react-navigation/bottom-tabs on web.",
+    "Optional: replace deprecated TouchableWithoutFeedback in add-expense.tsx with Pressable and migrate shadow* props to boxShadow to silence web warnings."
+  ],
+  "critical_code_review_comments": [
+    "Empty validation works (amount-input + save-expense shows 'Introduce un importe válido').",
+    "Add-expense flow updates hero-total (0,00 € → 25,50 € → 35,50 €) and stat-count correctly.",
+    "Watermark 'appsthur' present with testID=watermark.",
+    "Dark mode toggle works visually.",
+    "Budget modal (budget-input, budget-save) and currency modal (currency-EUR, currency-USD) found and operable.",
+    "Goals tab exposes goal-row-food and badge-first_expense as required.",
+    "Stats tab exposes segment-categories, segment-weekly and habit-card."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "≈92% (12/13 areas pass; only tab testIDs missing on web)"},
+  "seed_data_creation": "Created 2 in-session expenses (Comida 25,50€ Almuerzo; Transporte 10€) — cleared with fresh browser contexts between runs.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use mobile viewport 390x844. To navigate tabs on web, use page.get_by_text('Estadísticas'|'Objetivos'|'Ajustes'|'Inicio').first.click(force=True) until main agent adds explicit data-testid on tab buttons. All other testIDs from the PRD are present and functional. AsyncStorage persists between reloads within the same browser context but Playwright launches a fresh context per script run.",
+  "rca_of_issue": "tabBarTestID on Tabs.Screen options is consumed only by the native bottom-tabs implementation. On web (@react-navigation/bottom-tabs web build), the tab is rendered as <a role='tab'> and the testID prop is dropped, leaving no data-testid attribute. Fix: provide a custom tabBarButton via screenOptions/options that renders a Pressable with testID, e.g. options={{ tabBarButton: (props) => <Pressable testID='tab-home' {...props} /> }} for each Tabs.Screen."
+}
